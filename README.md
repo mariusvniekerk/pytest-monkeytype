@@ -1,7 +1,7 @@
 # pytest-monkeytype
 
-[![Build Status](https://travis-ci.org/kensho-technologies/pytest-monkeytype.svg?branch=master)](https://travis-ci.org/kensho-technologies/pytest-monkeytype)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://travis-ci.org/mariusvniekerk/pytest-monkeytype.svg?branch=master)](https://travis-ci.org/mariusvniekerk/pytest-monkeytype)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![PyPI Python](https://img.shields.io/pypi/pyversions/pytest-monkeytype.svg)](https://pypi.python.org/pypi/pytest-monkeytype)
 [![PyPI Version](https://img.shields.io/pypi/v/pytest-monkeytype.svg)](https://pypi.python.org/pypi/pytest-monkeytype)
 [![PyPI Status](https://img.shields.io/pypi/status/pytest-monkeytype.svg)](https://pypi.python.org/pypi/pytest-monkeytype)
@@ -28,4 +28,4 @@ monkeytype apply some.module
 ```
 
 
-This project is inspired by https://github.com/kensho-technologies/pytest-monkeytype
+This project is inspired by [pytest-annotate](https://github.com/kensho-technologies/pytest-annotate)
