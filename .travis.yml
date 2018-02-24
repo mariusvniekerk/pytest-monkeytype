@@ -1,0 +1,17 @@
+sudo: false
+language: python
+cache: pip
+python:
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+install:
+  - pip install -r dev-requirements.txt
+  - pip install -e .
+script:
+  - flake8 pytest_monkeytype/
+  - pydocstyle pytest_monkeytype/
+  - isort --check-only --verbose --recursive pytest_monkeytype/
+  - pylint pytest_monkeytype/
+  - bandit -r pytest_monkeytype/
