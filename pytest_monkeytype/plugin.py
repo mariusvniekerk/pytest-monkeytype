@@ -31,8 +31,6 @@ class PyAnnotatePlugin(object):
             code_filter=config.code_filter(),
             sample_rate=None,
         )
-        print("PREPARING TRACE")
-        self.config = config
         self.tracer = tracer
         sys.setprofile(self.tracer)
 
@@ -43,7 +41,6 @@ class PyAnnotatePlugin(object):
 
     def pytest_runtest_call(self):
         """Handle the pytest hook event that a test is about to be run: start type collection."""
-        print("STARTING TRACE")
         sys.setprofile(self.tracer)
 
     def pytest_runtest_teardown(self):
