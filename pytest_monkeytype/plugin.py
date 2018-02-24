@@ -52,7 +52,8 @@ class PyAnnotatePlugin(object):
 def pytest_addoption(parser):
     """Add our --analyze option to the pytest option parser."""
     parser.addoption(
-        '--monkeytype-output', help='Output file where PyAnnotate stats should be saved.  Eg: "monkeytype.sqlite3"')
+        '--monkeytype-output',
+        help='Output file where PyAnnotate stats should be saved.  Eg: "monkeytype.sqlite3"')
 
 
 def pytest_configure(config):
