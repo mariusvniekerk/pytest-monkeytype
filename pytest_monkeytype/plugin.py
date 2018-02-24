@@ -12,8 +12,9 @@ class PyAnnotatePlugin(object):
     def __init__(self, output_file):
         """Create a new PyAnnotatePlugin that analyzes function calls to extract type info."""
         from monkeytype.config import DefaultConfig
-        os.environ[DefaultConfig.DB_PATH_VAR] = output_file
         from monkeytype.tracing import CallTracer
+
+        os.environ[DefaultConfig.DB_PATH_VAR] = output_file
         self.tracer: typing.Optional[CallTracer] = None
 
     def pytest_collection_finish(self, session):
