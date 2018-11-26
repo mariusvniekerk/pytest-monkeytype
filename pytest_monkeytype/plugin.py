@@ -3,8 +3,10 @@
 
 import os
 import sys
-import typing
 
+if False:
+    from typing import Optional
+    from monkeytype.tracing import CallTracer
 
 class PyAnnotatePlugin(object):
     """A pytest plugin that profiles function calls to extract type info."""
@@ -12,12 +14,11 @@ class PyAnnotatePlugin(object):
     def __init__(self, output_file):
         """Create a new PyAnnotatePlugin that analyzes function calls to extract type info."""
         from monkeytype.config import DefaultConfig
-        from monkeytype.tracing import CallTracer
 
         self.config = DefaultConfig()
         self.trace_logger = self.config.trace_logger()
         os.environ[DefaultConfig.DB_PATH_VAR] = output_file
-        self.tracer: typing.Optional[CallTracer] = None
+        self.tracer = None  # type: Optional[CallTracer]
 
     def pytest_collection_finish(self, session):
         """Handle the pytest collection finish hook: configure pyannotate.
