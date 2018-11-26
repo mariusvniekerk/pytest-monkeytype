@@ -8,7 +8,8 @@ if False:
     from typing import Optional
     from monkeytype.tracing import CallTracer
 
-class PyAnnotatePlugin(object):
+
+class MonkeyTypePlugin(object):
     """A pytest plugin that profiles function calls to extract type info."""
 
     def __init__(self):
@@ -61,4 +62,4 @@ def pytest_configure(config):
     option_value = config.getoption('--monkeytype-output')
     if option_value:
         os.environ['MT_DB_PATH'] = os.path.abspath(option_value)
-        config.pluginmanager.register(PyAnnotatePlugin())
+        config.pluginmanager.register(MonkeyTypePlugin())
