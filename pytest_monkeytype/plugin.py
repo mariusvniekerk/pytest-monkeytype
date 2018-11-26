@@ -14,6 +14,8 @@ class PyAnnotatePlugin(object):
         from monkeytype.config import DefaultConfig
         from monkeytype.tracing import CallTracer
 
+        self.config = DefaultConfig()
+        self.trace_logger = self.config.trace_logger()
         os.environ[DefaultConfig.DB_PATH_VAR] = output_file
         self.tracer: typing.Optional[CallTracer] = None
 
@@ -24,21 +26,18 @@ class PyAnnotatePlugin(object):
         gives gevent a chance to monkey patch the world before importing pyannotate.
         """
         from monkeytype.tracing import CallTracer
-        from monkeytype.config import DefaultConfig
 
-        config = DefaultConfig()
-        tracer = CallTracer(
-            logger=config.trace_logger(),
-            code_filter=config.code_filter(),
+        self.tracer = CallTracer(
+            logger=self.trace_logger,
+            code_filter=self.config.code_filter(),
             sample_rate=None,
         )
-        self.tracer = tracer
         sys.setprofile(self.tracer)
 
     def pytest_unconfigure(self, config):
         """Unconfigure the pytest plugin. Happens when pytest is about to exit."""
         sys.setprofile(None)
-        self.tracer.logger.flush()
+        self.trace_logger.flush()
 
     def pytest_runtest_call(self):
         """Handle the pytest hook event that a test is about to be run: start type collection."""
@@ -47,7 +46,7 @@ class PyAnnotatePlugin(object):
     def pytest_runtest_teardown(self):
         """Handle the pytest test end hook event: stop type collection."""
         sys.setprofile(None)
-        self.tracer.logger.flush()
+        self.trace_logger.flush()
 
 
 def pytest_addoption(parser):
