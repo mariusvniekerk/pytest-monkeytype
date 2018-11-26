@@ -11,13 +11,12 @@ if False:
 class PyAnnotatePlugin(object):
     """A pytest plugin that profiles function calls to extract type info."""
 
-    def __init__(self, output_file):
+    def __init__(self):
         """Create a new PyAnnotatePlugin that analyzes function calls to extract type info."""
         from monkeytype.config import DefaultConfig
 
         self.config = DefaultConfig()
         self.trace_logger = self.config.trace_logger()
-        os.environ[DefaultConfig.DB_PATH_VAR] = output_file
         self.tracer = None  # type: Optional[CallTracer]
 
     def pytest_collection_finish(self, session):
@@ -61,5 +60,5 @@ def pytest_configure(config):
     """Configure the plugin based on the supplied value for the  option."""
     option_value = config.getoption('--monkeytype-output')
     if option_value:
-        base_path = os.path.abspath(option_value)
-        config.pluginmanager.register(PyAnnotatePlugin(base_path))
+        os.environ['MT_DB_PATH'] = os.path.abspath(option_value)
+        config.pluginmanager.register(PyAnnotatePlugin())
