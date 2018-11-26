@@ -1,5 +1,5 @@
 # Copyright 2017 Kensho Technologies, Inc.
-"""The pytest plugin that calls out to PyAnnotate."""
+"""Enable MonkeyType tracing & logging to collect type info."""
 
 import os
 import sys
@@ -10,10 +10,13 @@ if False:
 
 
 class MonkeyTypePlugin(object):
+    """Enable MonkeyType tracing & logging to collect type info."""
     """A pytest plugin that profiles function calls to extract type info."""
 
     def __init__(self):
         """Create a new PyAnnotatePlugin that analyzes function calls to extract type info."""
+
+        """Initialize the plugin that profiles calls to extract type info."""
         from monkeytype.config import DefaultConfig
 
         self.config = DefaultConfig()
@@ -21,10 +24,11 @@ class MonkeyTypePlugin(object):
         self.tracer = None  # type: Optional[CallTracer]
 
     def pytest_collection_finish(self, session):
-        """Handle the pytest collection finish hook: configure pyannotate.
+        """Configure MonkeyType and set as profiler after collection.
 
-        Explicitly delay importing `collect_types` until all tests have been collected. This
-        gives gevent a chance to monkey patch the world before importing pyannotate.
+        Explicitly delay importing until all tests have been collected. This
+        gives gevent a chance to monkey patch the world before importing
+        CallTracer.
         """
         from monkeytype.tracing import CallTracer
 
@@ -36,29 +40,29 @@ class MonkeyTypePlugin(object):
         sys.setprofile(self.tracer)
 
     def pytest_unconfigure(self, config):
-        """Unconfigure the pytest plugin. Happens when pytest is about to exit."""
+        """Unconfigure by disabling profiling and flushing the logger."""
         sys.setprofile(None)
         self.trace_logger.flush()
 
     def pytest_runtest_call(self):
-        """Handle the pytest hook event that a test is about to be run: start type collection."""
+        """Start collection by installing the CallTracer as profiler."""
         sys.setprofile(self.tracer)
 
     def pytest_runtest_teardown(self):
-        """Handle the pytest test end hook event: stop type collection."""
+        """Stop collection by disabling profiling and flushing the logger."""
         sys.setprofile(None)
         self.trace_logger.flush()
 
 
 def pytest_addoption(parser):
-    """Add our --analyze option to the pytest option parser."""
+    """Add our --monkeytype-output option to the pytest option parser."""
     parser.addoption(
         '--monkeytype-output',
-        help='Output file where PyAnnotate stats should be saved.  Eg: "monkeytype.sqlite3"')
+        help='Output file where MonkeyType stats should be saved.  Eg: "monkeytype.sqlite3"')
 
 
 def pytest_configure(config):
-    """Configure the plugin based on the supplied value for the  option."""
+    """Enable and configure the output location."""
     option_value = config.getoption('--monkeytype-output')
     if option_value:
         os.environ['MT_DB_PATH'] = os.path.abspath(option_value)
