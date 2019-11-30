@@ -2,6 +2,10 @@
 
 ## Current development version
 
+## v1.0.3
+
+- Repackage to improve pypi listing
+
 ## v1.0.2
 
 - Added support for test suites that use `gevent` monkey-patching. [#4](https://github.com/kensho-technologies/pytest-monkeytype/pull/4)
