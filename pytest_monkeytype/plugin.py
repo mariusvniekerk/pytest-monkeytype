@@ -11,14 +11,16 @@ if typing.TYPE_CHECKING:
 
 
 class MonkeyTypePlugin(object):
-    """Enable MonkeyType tracing & logging to collect type info."""
+    """Enable MonkeyType tracing & logging to collect type info.
 
-    """A pytest plugin that profiles function calls to extract type info."""
+    A pytest plugin that profiles function calls to extract type info.
+    """
 
     def __init__(self):
-        """Create a new PyAnnotatePlugin that analyzes function calls to extract type info."""
+        """Create a new PyAnnotatePlugin that analyzes function calls to extract type info.
 
-        """Initialize the plugin that profiles calls to extract type info."""
+        Initialize the plugin that profiles calls to extract type info.
+        """
         from monkeytype.config import DefaultConfig
 
         self.config = DefaultConfig()
