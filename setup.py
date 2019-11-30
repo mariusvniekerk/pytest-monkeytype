@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name=package_name,
-    version=version,
+    version="1.0.3",
     description='pytest-monkeytype: Generate Monkeytype annotations from your pytest tests.',
     long_description=long_description,
     long_description_content_type="text/markdown",
