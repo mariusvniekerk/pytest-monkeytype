@@ -18,7 +18,7 @@ pip install pytest-monkeytype
 py.test --monkeytype-output=./monkeytype.sqlite3
 
 # Get a listing of modules annotated by monkeytype
-monkeytype list-modules 
+monkeytype list-modules
 
 # Generate a stub file for those annotations using monkeytype:
 monkeytype stub some.module

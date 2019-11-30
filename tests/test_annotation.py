@@ -11,5 +11,4 @@ def test_mixed():
 
 
 def test_string():
-    fn('1', '5')
-
+    fn("1", "5")

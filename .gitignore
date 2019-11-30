@@ -44,5 +44,6 @@ tools/sphinx_docgen/docs_html
 build/
 dist/
 rever/
+.mypy_cache/
 
 *.sqlite3
