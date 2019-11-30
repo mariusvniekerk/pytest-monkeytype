@@ -43,5 +43,6 @@ tools/sphinx_docgen/docs_html
 # Python package publishing directories
 build/
 dist/
+rever/
 
 *.sqlite3

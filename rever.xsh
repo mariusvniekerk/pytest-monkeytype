@@ -8,8 +8,8 @@ $ACTIVITIES = [
 	'ghrelease'
 ]
 
-$GITHUB_ORG = 'flatironhealth'
-$GITHUB_REPO = 'fh-immuta-utils'
+$GITHUB_ORG = 'mariusvniekerk'
+$GITHUB_REPO = 'pytest-monkeytype'
 
 $VERSION_BUMP_PATTERNS = [
    # These note where/how to find the version numbers
