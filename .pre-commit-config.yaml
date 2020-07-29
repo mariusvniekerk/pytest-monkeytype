@@ -1,13 +1,13 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: master
+  rev: v3.1.0
   hooks:
     - id: trailing-whitespace
 - repo: https://github.com/python/black
-  rev: master
+  rev: 19.10b0
   hooks:
     - id: black
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: master
+  rev: v0.782
   hooks:
     - id: mypy

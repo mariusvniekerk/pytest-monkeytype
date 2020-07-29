@@ -71,7 +71,10 @@ def pytest_addoption(parser):
     """Add our --monkeytype-output option to the pytest option parser."""
     parser.addoption(
         "--monkeytype-output",
-        help='Output file where MonkeyType stats should be saved.  Eg: "monkeytype.sqlite3"',
+        help=(
+            "Output file where MonkeyType stats should be saved.  Eg:"
+            ' "monkeytype.sqlite3"'
+        ),
     )
 
 
