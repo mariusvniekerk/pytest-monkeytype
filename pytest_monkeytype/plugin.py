@@ -36,11 +36,20 @@ class MonkeyTypePlugin(object):
         """
         from monkeytype.tracing import CallTracer
 
-        self.tracer = CallTracer(
-            logger=self.trace_logger,
-            code_filter=self.config.code_filter(),
-            sample_rate=None,
-        )
+        try:
+            self.tracer = CallTracer(
+                logger=self.trace_logger,
+                code_filter=self.config.code_filter(),
+                sample_rate=None,
+            )
+        except TypeError:
+            # max_typed_dict_size argument added since MonkeyType 20.4.1 or later
+            self.tracer = CallTracer(
+                logger=self.trace_logger,
+                max_typed_dict_size=0,
+                code_filter=self.config.code_filter(),
+                sample_rate=None,
+            )
         sys.setprofile(self.tracer)
 
     def pytest_unconfigure(self, config):
