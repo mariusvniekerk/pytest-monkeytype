@@ -35,6 +35,7 @@ nosetests.xml
 .idea/
 .idea/*
 *.sublime-*
+.vscode
 
 # Sphinx docs
 tools/sphinx_docgen/docs_rst

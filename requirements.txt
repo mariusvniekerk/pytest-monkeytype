@@ -1,2 +1,2 @@
-monkeytype>=18.2.0
+monkeytype>=20.5.0
 pytest>=3.2.5
